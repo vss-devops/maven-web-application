@@ -1,0 +1,85 @@
+pipeline {
+    agent any
+    
+    tools{
+        maven "maven3.8.5"
+    }
+    
+    // triggers {
+    //     pollSCM '* * * * *'
+    // }
+ 
+    options {
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
+        //adding timestamp to script
+    timestamps()
+    }
+
+    stages{
+        
+        stage('CheckOutCode'){
+            steps{
+                git branch: 'development', credentialsId: '96e56444-b157-401a-a1ad-faa3e97a4a9d', url: 'https://github.com/vss-devops/maven-web-application.git'
+            }
+        }
+    
+        stage("Build"){
+            steps{
+                sh "mvn clean package"
+            }
+        }
+        
+        stage('SonarQubeReport'){
+            steps{
+                sh "mvn sonar:sonar"
+            }
+        }
+        
+        stage('DeployToArtifactoryRepo'){
+            steps{
+                sh "mvn deploy"
+            }
+        }
+        
+        stage('DeployToTomcat'){
+            steps{
+                sshagent(['645c45c9-56ac-4345-b834-8b156accb765']) {
+                sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@34.238.242.58:/opt/apache-tomcat-9.0.68/webapps"
+                }
+            }
+        }
+    }
+
+post {
+  success {
+    sendSlackNotifications('SUCCESS')
+  }
+  failure {
+    sendSlackNotifications('FAILURE')
+  }
+}
+
+}
+
+def sendSlackNotifications(String buildStatus = 'STARTED') {
+  buildStatus = buildStatus ?: 'SUCCESS'
+  
+  def colorName = 'RED'
+  def colorCode = '#FF0000'
+  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  def summary = "${subject} (${env.BUILD_URL})"
+  
+  if (buildStatus == 'STARTED'){
+	color = 'YELLOW'
+	colorCode = '#FF0000'
+  } else if (buildStatus == 'SUCCESS') {
+	color = 'GREEN'
+	colorCode = '#00FF00'
+  } else {
+    color = 'RED'
+	colorCode = '#FF0000'
+  }
+  
+  slackSend (color: colorCode, message: summary, channel: 'wallmart' )
+  
+}
