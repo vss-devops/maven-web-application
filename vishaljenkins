@@ -5,7 +5,9 @@ node{
 echo "Job name is: ${env.JOB_NAME}" 
 echo "Node name is: ${env.NODE_NAME}" 
 echo "Build Number is: ${env.BUILD_NUMBER}" 
-    
+
+
+try{
     stage('CheckOutCode'){
         git branch: 'development', credentialsId: '96e56444-b157-401a-a1ad-faa3e97a4a9d', url: 'https://github.com/vss-devops/maven-web-application.git'
     }
@@ -27,4 +29,11 @@ echo "Build Number is: ${env.BUILD_NUMBER}"
             sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@34.238.242.58:/opt/apache-tomcat-9.0.68/webapps"
         }
     }
+}catch(e){
+currentBuild.result = 'FAILED'
+    throw e
 }
+finally{
+sendSlackNotifications(currentBuild.result)
+}
+}//Node Closing
