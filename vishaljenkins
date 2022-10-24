@@ -16,13 +16,13 @@ try{
         sh "${mavenHome}/bin/mvn clean package" 
     }
     
-    stage('SonarReport'){
+   /* stage('SonarReport'){
         sh "${mavenHome}/bin/mvn sonar:sonar" 
     }
     
     stage('UploadArtifactToNexus'){
         sh "${mavenHome}/bin/mvn deploy" 
-    }
+    }*/
     
     stage('DeployToTomcat')
         {sshagent(['645c45c9-56ac-4345-b834-8b156accb765']) {
