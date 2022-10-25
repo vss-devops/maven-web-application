@@ -1,4 +1,4 @@
-//@Library('sharedlibs') _
+@Library('sharedlibs') _
 
 node{
     def mavenHome = tool name: "maven3.8.5"
