@@ -26,6 +26,7 @@ pipeline {
         stage("Build"){
             steps{
                 sh "mvn clean package"
+		build job: 'pipeline-scriptedway'
             }
         }
         
