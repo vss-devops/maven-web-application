@@ -1,3 +1,5 @@
+//@Library('sharedlibs') _
+
 node{
     def mavenHome = tool name: "maven3.8.5"
     properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], 
@@ -42,7 +44,7 @@ sendSlackNotifications(currentBuild.result)
 
 //Below code will use to send slack notification
 
-def sendSlackNotifications(String buildStatus = 'STARTED') {
+/*def sendSlackNotifications(String buildStatus = 'STARTED') {
   buildStatus = buildStatus ?: 'SUCCESS'
   
   def colorName = 'RED'
@@ -63,4 +65,4 @@ def sendSlackNotifications(String buildStatus = 'STARTED') {
   
   slackSend (color: colorCode, message: summary, channel: 'wallmart' )
   
-}
+}*/
