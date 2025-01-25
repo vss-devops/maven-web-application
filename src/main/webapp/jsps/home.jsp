@@ -9,17 +9,19 @@
 </head>
 </head>
 <body>
-<h1 align="center">Welcome to Mithun Software Solutions. Bengaluru,Karnataka </h1>
-<h1 align="center"> Mithun Software Solutions- Very Good Training center for DevOps with AWS in Maratha Halli Bangalore India and also for Job Assitance Job Support also...Teaching Real Time scnerios</h1>
+<h1 align="center">Welcome to Vishal Technologies. Ph No: 8806145169</h1>
+<h1 align="center"> Vishal Technologies- Very Good Training center for DevOps & Cloud </h1>
+
+<h2> Trainer Name: Vishal Sharma</h2>
 <hr>
 <br>
-	<h1><h3> Server Side IP Address </h3><br>
+        <h1><h3> Server Side IP Address </h3><br>
 
-<% 
+<%
 String ip = "";
 InetAddress inetAddress = InetAddress.getLocalHost();
 ip = inetAddress.getHostAddress();
-out.println("Server Host Name :: "+inetAddress.getHostName()); 
+out.println("Server Host Name :: "+inetAddress.getHostName());
 %>
 <br>
 <%out.println("Server IP Address :: "+ip);%>
@@ -30,25 +32,25 @@ out.println("Server Host Name :: "+inetAddress.getHostName());
 <%out.print( "Client Name Host :: "+ request.getRemoteHost() );%><br></h1>
 <hr>
 <div style="text-align: center;">
-	<span>
-		<img src="images/mithunlogo.jpg" alt="" width="100">
-	</span>
-	<span style="font-weight: bold;">
-		Mithun Technologies, 
-		Martha Halli, Above ICICI Bank, Beside Meghana Foods,
-		Bangalore,
-		+91-9980923226
-		devopstrainingblr@gmail.com
-		<br>
-		<a href="mailto:devopstrainingblr@gmail.com">Mail to Mithun Technologies</a>
-	</span>
+        <span>
+                <img src="images/mithunlogo.jpg" alt="" width="100">
+        </span>
+        <span style="font-weight: bold;">
+                Vishal Technologies,
+                Taj hotel
+                Mumbai,
+                8806145169
+                vworld786@gmail.com
+                <br>
+                <a href="mailto:vworld786@gmail.com">Mail to Vishal Technologies</a>
+        </span>
 </div>
 <hr>
-	<p> Service : <a href="services/employee/getEmployeeDetails">Get Employee Details </p>
+        <p> Service : <a href="services/employee/getEmployeeDetails">Get Employee Details </p>
 <hr>
 <hr>
 <p align=center>Mithun Technologies - Consultant, Training, Development Center.</p>
-<p align=center><small>Copyrights 2022 by <a href="http://mithuntechnologies.com/">Mithun Technologies,Bengaluru</a> </small></p>
+<p align=center><small>Copyrights 2022 by <a href="http://vishaltechnologies.com/">Vishal Technologies,Mumbai</a> </small></p>
 
 </body>
 </html>
